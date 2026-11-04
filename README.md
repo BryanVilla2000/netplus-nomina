@@ -2,14 +2,9 @@
 
 Control de asistencia del personal a partir de las marcaciones del biométrico **Z-BioTime**.
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-24-5FA04E?logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169E1?logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+**Tecnologías:** React, Vite, Node.js, Express, PostgreSQL, Docker
 
-**[Ver el prototipo en Figma »](https://www.figma.com/make/7AKRoXZukgIyuk3YPqdWda/Prototipo-Dashboard-N%C3%B3mina-NetPlus?t=QDPHhIcqvmiUIDkV-1)**
+[Ver el prototipo en Figma »](https://www.figma.com/proto/jNwRc6DI1ZMyOKz4fdVPdn/Nettplus---Dashboard-de-N%C3%B3mina?node-id=2-13&p=f&t=aNenLshZD4AB6bvV-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A13&show-proto-sidebar=1)
 
 ---
 
@@ -64,7 +59,7 @@ Reemplazar el cálculo manual de asistencia en hojas de Excel por un sistema que
 9. Horarios de turno
 10. Feriados
 
-El diseño completo, con sus estados de error y de carga, está en el [prototipo de Figma](https://www.figma.com/make/7AKRoXZukgIyuk3YPqdWda/Prototipo-Dashboard-N%C3%B3mina-NetPlus?t=QDPHhIcqvmiUIDkV-1).
+El diseño completo, con sus estados de error y de carga, está en el [prototipo de Figma](https://www.figma.com/proto/jNwRc6DI1ZMyOKz4fdVPdn/Nettplus---Dashboard-de-N%C3%B3mina?node-id=2-13&p=f&t=aNenLshZD4AB6bvV-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A13&show-proto-sidebar=1
 
 ## Arquitectura
 
