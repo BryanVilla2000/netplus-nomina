@@ -120,8 +120,8 @@ Colores corporativos de NetPlus, según el Manual de Marca 2026:
 
 ## Integrantes
 
-- (completar con los nombres del equipo)
+- Bryan MIchael Villa Camacho
 
 ---
 
-**NETPLUS** · *The power of fiber*
+**NETPLUS** · 
