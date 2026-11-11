@@ -1,0 +1,207 @@
+/* ===== Pantalla de inicio de sesión (Figma: "Inicio de sesión – Escritorio", 1440 × 900) =====
+   Bootstrap pone el layout, la tarjeta, los campos, el botón y las alertas (ver Login.jsx).
+   Aquí solo queda lo propio de la marca. */
+
+/* ---------- Panel de marca (izquierda) ---------- */
+.login__marca {
+  padding: 64px;
+  background: var(--color-azul);
+}
+
+/* Los círculos se anclan arriba/derecha/abajo para conservar la composición en cualquier alto de pantalla */
+.login__circulo {
+  max-width: none;
+  pointer-events: none;
+}
+.login__circulo--contorno {
+  width: 380px;
+  height: 380px;
+  top: -170px;
+  right: -130px;
+}
+.login__circulo--verde {
+  width: 420px;
+  height: 420px;
+  bottom: -170px;
+  right: -100px;
+}
+.login__circulo--amarillo {
+  width: 110px;
+  height: 110px;
+  bottom: 250px;
+  right: 45px;
+}
+
+/* Contenido por encima de los círculos */
+.logo,
+.mensaje,
+.login__derechos {
+  position: relative;
+}
+
+.logo {
+  gap: 14px;
+}
+.logo__icono {
+  width: 56px;
+  height: 56px;
+  border: 3px solid var(--color-blanco);
+  border-radius: 28px;
+  background: var(--color-verde);
+  color: var(--color-blanco);
+  font-size: 34px;
+  font-weight: 800;
+}
+.logo__texto {
+  gap: 2px;
+}
+.logo__nombre {
+  gap: 1px;
+  font-size: 30px;
+}
+.logo__nett {
+  font-weight: 800;
+  color: var(--color-blanco);
+}
+.logo__plus {
+  font-weight: 500;
+  color: var(--color-verde);
+}
+.logo__lema {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.26px;
+  color: var(--color-verde);
+}
+
+.mensaje {
+  gap: 20px;
+  width: 460px;
+  max-width: 100%;
+}
+.mensaje__etiqueta {
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-blanco);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.96px;
+}
+.mensaje__titulo {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 52px;
+  color: var(--color-blanco);
+}
+.mensaje__texto {
+  margin: 0;
+  font-size: 16px;
+  line-height: 25px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.login__derechos {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---------- Tarjeta de acceso (derecha) ---------- */
+.login__tarjeta {
+  --bs-card-bg: var(--color-blanco);
+  --bs-card-border-radius: 20px;
+  --bs-card-spacer-x: 40px;
+  --bs-card-spacer-y: 40px;
+  max-width: 440px;
+  box-shadow: 0 12px 32px rgba(35, 58, 132, 0.12);
+}
+
+.tarjeta__encabezado {
+  gap: 10px;
+}
+.acento {
+  gap: 4px;
+}
+.acento__verde,
+.acento__amarillo {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+}
+.acento__verde {
+  width: 28px;
+  background: var(--color-verde);
+}
+.acento__amarillo {
+  width: 12px;
+  background: var(--color-amarillo);
+}
+.tarjeta__titulo {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: normal;
+  color: var(--color-azul);
+}
+.tarjeta__subtitulo {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-suave);
+}
+.tarjeta__pie {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-suave);
+}
+
+.aviso {
+  gap: 10px;
+}
+.aviso__icono {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.campos {
+  gap: 18px;
+}
+
+/* El botón "Mostrar" queda dentro del campo de contraseña */
+.form-control.campo__clave,
+.form-control.campo__clave.is-invalid {
+  padding-right: 88px;
+}
+.campo__mostrar {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  color: var(--color-azul);
+}
+.campo__mostrar:hover,
+.campo__mostrar:disabled {
+  color: var(--color-azul);
+}
+
+/* ---------- Botón de ingresar ---------- */
+.login__boton {
+  gap: 10px;
+}
+.login__carga {
+  animation: girar 0.8s linear infinite;
+}
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login__carga {
+    animation-duration: 2.4s;
+  }
+}

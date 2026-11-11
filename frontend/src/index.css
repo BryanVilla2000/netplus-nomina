@@ -1,111 +1,133 @@
+/* =========================================================================
+   Tema NETTplus sobre Bootstrap 5.3
+   Colores del Manual de Marca 2026 y de interfaz del prototipo de Figma.
+   Se personaliza con las variables CSS de Bootstrap (sin necesidad de Sass).
+   ========================================================================= */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Colores de la marca */
+  --color-azul: #233a84;
+  --color-verde: #73b542;
+  --color-amarillo: #fdea18;
+  --color-blanco: #ffffff;
+  --color-fondo: #f4f6fb;
+  --color-texto: #1b2440;
+  --color-suave: #5b647f;
+  --color-borde: #d5dae8;
+  --color-error: #c62828;
+  --color-error-fondo: #fdecec;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --fuente: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Variables de Bootstrap apuntando a la marca */
+  --bs-primary: #233a84;
+  --bs-primary-rgb: 35, 58, 132;
+  --bs-success: #73b542;
+  --bs-success-rgb: 115, 181, 66;
+  --bs-warning: #fdea18;
+  --bs-warning-rgb: 253, 234, 24;
+  --bs-danger: #c62828;
+  --bs-danger-rgb: 198, 40, 40;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --bs-body-font-family: var(--fuente);
+  --bs-body-line-height: normal;
+  --bs-body-color: #1b2440;
+  --bs-body-color-rgb: 27, 36, 64;
+  --bs-body-bg: #f4f6fb;
+  --bs-body-bg-rgb: 244, 246, 251;
+  --bs-secondary-color: #5b647f;
+  --bs-border-color: #d5dae8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
-  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* ---- Botones: azul de la marca, esquinas de 12 px ---- */
+.btn-primary {
+  --bs-btn-bg: var(--color-azul);
+  --bs-btn-border-color: var(--color-azul);
+  --bs-btn-hover-bg: #2c4698;
+  --bs-btn-hover-border-color: #2c4698;
+  --bs-btn-active-bg: #1c2f6c;
+  --bs-btn-active-border-color: #1c2f6c;
+  --bs-btn-disabled-bg: var(--color-azul);
+  --bs-btn-disabled-border-color: var(--color-azul);
+  --bs-btn-disabled-opacity: 0.9;
+  --bs-btn-focus-shadow-rgb: 35, 58, 132;
+  --bs-btn-padding-x: 16px;
+  --bs-btn-padding-y: 16px;
+  --bs-btn-font-size: 16px;
+  --bs-btn-font-weight: 600;
+  --bs-btn-line-height: normal;
+  --bs-btn-border-width: 0px;
+  --bs-btn-border-radius: 12px;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
+/* ---- Campos de formulario: borde 1.5 px, esquinas de 12 px, error en rojo suave ---- */
+.form-control {
+  padding: 16px;
+  border-width: 1.5px;
+  border-color: var(--color-borde);
+  border-radius: 12px;
   font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  font-weight: 400;
+  line-height: normal;
+  color: var(--color-texto);
+}
+.form-control::placeholder {
+  color: var(--color-suave);
+  opacity: 1;
+}
+.form-control:focus {
+  border-color: var(--color-azul);
+  box-shadow: 0 0 0 3px rgba(35, 58, 132, 0.15);
+}
+.form-control:disabled {
+  background-color: var(--color-fondo);
+  opacity: 1;
+}
+.form-control.is-invalid,
+.form-control.is-invalid:focus {
+  border-color: var(--color-error);
+  background-color: var(--color-error-fondo);
+  background-image: none; /* quita el ícono de Bootstrap, el diseño no lo lleva */
+  padding-right: 16px;
+}
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
+}
+
+.form-label {
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+/* ---- Alertas: error (rojo) y aviso informativo (azul) ---- */
+.alert {
+  --bs-alert-padding-x: 14px;
+  --bs-alert-padding-y: 12px;
+  --bs-alert-margin-bottom: 0;
+  --bs-alert-border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19px;
+}
+.alert-danger {
+  --bs-alert-color: var(--color-error);
+  --bs-alert-bg: var(--color-error-fondo);
+  --bs-alert-border-color: var(--color-error);
+}
+.alert-nettplus {
+  --bs-alert-color: var(--color-azul);
+  --bs-alert-bg: var(--color-fondo);
+  --bs-alert-border-color: rgba(35, 58, 132, 0.35);
 }
