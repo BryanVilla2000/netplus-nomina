@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config');
-const db = require('../db');
+const config = require('../config/config');
+const db = require('../config/db');
 
 // Busca el usuario con su rol actual. Se usa tanto en el login como en cada petición,
 // así un cambio de rol o una baja se aplica de inmediato.

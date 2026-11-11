@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const config = require('../src/config');
+const config = require('../src/config/config');
 
 const ROLES = [
   { codigo: 'rrhh', nombre: 'Recursos Humanos / Desarrollo Organizacional' },

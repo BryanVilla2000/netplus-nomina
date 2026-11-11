@@ -1,5 +1,5 @@
-const config = require('./config');
-const db = require('./db');
+const config = require('./config/config');
+const db = require('./config/db');
 const app = require('./app');
 
 async function iniciar() {

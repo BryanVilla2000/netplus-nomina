@@ -1,4 +1,4 @@
-const config = require('./src/config');
+const config = require('./src/config/config');
 
 module.exports = {
   client: 'pg',

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const config = require('./config');
-const db = require('./db');
+const config = require('./config/config');
+const db = require('./config/db');
 const authRutas = require('./routes/auth'); // NUEVO
 const { noEncontrado, manejadorErrores } = require('./middleware/errores');
 

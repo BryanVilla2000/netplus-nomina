@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { z } = require('zod');
-const config = require('../config');
+const config = require('../config/config');
 const { requiereSesion, buscarUsuario, datosPublicos } = require('../middleware/auth');
 const { crearLimitador } = require('../middleware/limitarIntentos');
 
