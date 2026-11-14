@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const db = require('../config/db');
+const { permisosDe } = require('../config/permisos');
 
 // Busca el usuario con su rol actual. Se usa tanto en el login como en cada petición,
 // así un cambio de rol o una baja se aplica de inmediato.
@@ -13,7 +14,14 @@ function buscarUsuario(condicion) {
 }
 
 function datosPublicos(fila) {
-  return { id: fila.id, usuario: fila.usuario, nombre: fila.nombre, rol: fila.rol, rolNombre: fila.rol_nombre };
+  return {
+    id: fila.id,
+    usuario: fila.usuario,
+    nombre: fila.nombre,
+    rol: fila.rol,
+    rolNombre: fila.rol_nombre,
+    permisos: permisosDe(fila.rol), // el frontend los usa para mostrar u ocultar vistas
+  };
 }
 
 async function requiereSesion(req, res, next) {
@@ -51,4 +59,13 @@ const requiereRol = (...roles) => (req, res, next) => {
   next();
 };
 
-module.exports = { requiereSesion, requiereRol, buscarUsuario, datosPublicos };
+// Uso: router.post('/importar', requiereSesion, requierePermiso('importar'), controlador)
+// Es la protección real: ocultar botones en el frontend no basta, aquí se rechaza la petición.
+const requierePermiso = (permiso) => (req, res, next) => {
+  if (!req.usuario || !req.usuario.permisos.includes(permiso)) {
+    return res.status(403).json({ mensaje: 'No tienes acceso a esta sección', codigo: 'SIN_PERMISO' });
+  }
+  next();
+};
+
+module.exports = { requiereSesion, requiereRol, requierePermiso, buscarUsuario, datosPublicos };

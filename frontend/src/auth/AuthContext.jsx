@@ -54,9 +54,12 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => cerrarLocal(null), [cerrarLocal])
   const limpiarAviso = useCallback(() => setAviso(null), [])
 
+  // ¿El usuario de la sesión tiene este permiso? (la lista viene del backend)
+  const puede = useCallback((permiso) => Boolean(usuario?.permisos?.includes(permiso)), [usuario])
+
   const valor = useMemo(
-    () => ({ usuario, verificando, aviso, login, logout, limpiarAviso }),
-    [usuario, verificando, aviso, login, logout, limpiarAviso],
+    () => ({ usuario, verificando, aviso, login, logout, limpiarAviso, puede }),
+    [usuario, verificando, aviso, login, logout, limpiarAviso, puede],
   )
 
   return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>
