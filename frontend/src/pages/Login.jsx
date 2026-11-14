@@ -4,27 +4,25 @@ import { describirError } from '../api/cliente'
 import { useAuth } from '../auth/AuthContext'
 
 // Única imagen necesaria: Tu logo oficial en la carpeta img
-import imgLogoNettplus from '../assets/img/Logo-Nettplus.png' 
+import imgLogoNettplus from '../assets/img/Logo-Nettplus.png'
 import './Login.css'
 
 function PanelDeMarca() {
   return (
-    <aside className="login__marca position-relative d-none d-lg-flex flex-column justify-content-between align-items-start overflow-hidden w-50 flex-shrink-0 p-5">
-      
-      {/* Logotipo oficial */}
-      <div className="logo d-flex align-items-center">
-        <img 
-          src={imgLogoNettplus} 
-          alt="Nettplus - The Power of Fiber" 
-          className="img-fluid" 
-          style={{ maxHeight: '55px', objectFit: 'contain' }} 
-        />
+    <aside className="login__marca position-relative d-none d-lg-flex flex-column justify-content-between align-items-start overflow-hidden w-50 flex-shrink-0">
+      <span className="login__circulo login__circulo--contorno" aria-hidden="true" />
+      <span className="login__circulo login__circulo--verde" aria-hidden="true" />
+      <span className="login__circulo login__circulo--amarillo" aria-hidden="true" />
+
+      <div className="logo">
+        <div className="logo__tarjeta">
+          <img className="logo__imagen" src={imgLogoNettplus} alt="Nettplus - The Power of Fiber" />
+        </div>
       </div>
 
       <div className="mensaje d-flex flex-column align-items-start">
-        {/* Punto de viñeta hecho con CSS (sin archivos externos) */}
-        <div className="mensaje__etiqueta d-flex align-items-center gap-2 mb-2">
-          <span className="bg-success rounded-circle d-inline-block" style={{ width: '8px', height: '8px' }} aria-hidden="true" />
+        <div className="mensaje__etiqueta d-flex align-items-center">
+          <span className="mensaje__punto" aria-hidden="true" />
           <span>PANEL DE NÓMINA</span>
         </div>
         <h2 className="mensaje__titulo">Control de asistencia, claro y al día.</h2>
@@ -37,7 +35,6 @@ function PanelDeMarca() {
     </aside>
   )
 }
-
 export default function Login() {
   const { login, aviso, limpiarAviso } = useAuth()
   const navigate = useNavigate()
@@ -80,9 +77,14 @@ export default function Login() {
     <div className="login d-flex min-vh-100">
       <PanelDeMarca />
 
-      <main className="d-flex flex-grow-1 align-items-center justify-content-center p-4">
-        <form className="card login__tarjeta w-100 border-0" onSubmit={enviar} noValidate>
-          <div className="card-body d-flex flex-column gap-4">
+      <main className="login__principal d-flex flex-column flex-grow-1 align-items-center justify-content-center gap-4 p-4">
+        {/* En pantallas pequeñas el panel de marca se oculta: el logo pasa arriba del formulario */}
+        <div className="login__cabecera d-lg-none">
+          <div className="logo__tarjeta">
+            <img className="logo__imagen" src={imgLogoNettplus} alt="Nettplus - The Power of Fiber" />
+          </div>
+        </div>
+        <form className="card login__tarjeta w-100 border-0" onSubmit={enviar} noValidate>          <div className="card-body d-flex flex-column gap-4">
             <header className="tarjeta__encabezado d-flex flex-column">
               <div className="acento d-flex" aria-hidden="true">
                 <span className="acento__verde" />

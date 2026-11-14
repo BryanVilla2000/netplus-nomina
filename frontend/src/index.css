@@ -8,6 +8,7 @@
   --color-azul: #233a84;
   --color-verde: #73b542;
   --color-amarillo: #fdea18;
+  --degradado-marca: linear-gradient(339deg, var(--color-verde) 0%, 30%, var(--color-azul) 70%);
   --color-blanco: #ffffff;
   --color-fondo: #f4f6fb;
   --color-texto: #1b2440;
