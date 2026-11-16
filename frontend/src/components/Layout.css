@@ -1,0 +1,246 @@
+/* ===== Estructura con sesión: menú lateral (Figma: "Menú lateral", 264 px) + pantalla ===== */
+.app__principal {
+  min-width: 0;
+}
+.app__contenido {
+  padding: 32px;
+}
+
+/* ---------- Menú lateral ---------- */
+.menu {
+  flex: 0 0 264px;
+  width: 264px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  gap: 8px;
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--color-azul);
+}
+.menu__logo {
+  display: block;
+  padding: 8px 14px;
+  background: var(--color-blanco);
+  border-radius: 14px;
+}
+.menu__logo img {
+  display: block;
+  height: 36px;
+  width: auto;
+}
+.menu__titulo {
+  margin: 28px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-blanco);
+  opacity: 0.5;
+}
+.menu__relleno {
+  flex: 1 1 0;
+  min-height: 8px;
+}
+
+.menu__enlace {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  color: var(--color-blanco);
+}
+.menu__enlace:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-blanco);
+}
+.menu__enlace:focus-visible {
+  outline: 2px solid var(--color-blanco);
+  outline-offset: 2px;
+}
+.menu__enlace--activo,
+.menu__enlace--activo:hover {
+  background: var(--color-blanco);
+  font-weight: 600;
+  color: var(--color-azul);
+}
+
+.menu__punto {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+.menu__punto--chico {
+  width: 6px;
+  height: 6px;
+}
+.menu__punto--activo,
+.menu__enlace--activo .menu__punto {
+  background: var(--color-verde);
+}
+
+.menu__grupo {
+  border: 0;
+  text-align: left;
+}
+.menu__grupo--abierto {
+  font-weight: 600;
+}
+.menu__flecha {
+  flex: none;
+}
+.menu__grupo--abierto .menu__flecha {
+  transform: rotate(90deg);
+}
+.menu__submenu {
+  gap: 4px;
+  padding-left: 14px;
+}
+.menu__submenu .menu__enlace {
+  padding: 10px 14px;
+}
+
+.menu__usuario {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--color-blanco);
+}
+.menu__usuario-nombre {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-azul);
+}
+.menu__usuario-rol {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-suave);
+}
+
+/* ---------- Encabezado de cada pantalla ---------- */
+.encabezado {
+  padding: 20px 32px;
+  background: var(--color-blanco);
+  border-bottom: 1px solid var(--color-borde);
+}
+.encabezado__titulo {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: normal;
+  color: var(--color-azul);
+}
+.encabezado__subtitulo {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--color-suave);
+}
+.encabezado__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-azul);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-blanco);
+}
+
+/* ---------- Tarjeta base de contenido ---------- */
+.panel-tarjeta {
+  --bs-card-bg: var(--color-blanco);
+  --bs-card-border-color: var(--color-borde);
+  --bs-card-border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(35, 58, 132, 0.08);
+}
+
+/* ---------- Pantallas menores a 992 px: el menú se abre sobre el contenido ---------- */
+.app__barra {
+  padding: 8px 16px;
+  background: var(--color-blanco);
+  border-bottom: 1px solid var(--color-borde);
+}
+.app__hamburguesa {
+  display: flex;
+  padding: 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-azul);
+}
+.app__hamburguesa:focus-visible {
+  outline: 2px solid var(--color-azul);
+}
+.menu__fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 1039;
+  background: rgba(27, 36, 64, 0.5);
+}
+
+@media (max-width: 991.98px) {
+  .menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    max-width: 85vw;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.2s ease, visibility 0.2s;
+  }
+  .menu--abierto {
+    transform: none;
+    visibility: visible;
+  }
+  .encabezado {
+    padding: 16px;
+  }
+  .app__contenido {
+    padding: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    transition: none;
+  }
+}
+
+/* ---------- Pantalla "Acceso restringido" ---------- */
+.acceso__icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-fondo);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-azul);
+}
+.acceso__titulo {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+.acceso__texto {
+  max-width: 440px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--color-suave);
+}
+.acceso__boton {
+  --bs-btn-padding-x: 18px;
+  --bs-btn-padding-y: 12px;
+  --bs-btn-font-size: 13px;
+  --bs-btn-border-radius: 10px;
+}
