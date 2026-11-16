@@ -1,9 +1,12 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './auth/AuthContext'
-import { RutaProtegida, SoloInvitados } from './auth/Rutas'
-import Login from './pages/Login'
-import Inicio from './pages/Inicio'
+import { IrAlInicio, RutaProtegida, SoloInvitados } from './auth/Rutas'
+import Layout from './components/Layout'
+import { RUTAS_PENDIENTES } from './components/menu'
 import Consolidado from './pages/Consolidado'
+import EnConstruccion from './pages/EnConstruccion'
+import Inicio from './pages/Inicio'
+import Login from './pages/Login'
 
 export default function App() {
   return (
@@ -17,25 +20,47 @@ export default function App() {
             </SoloInvitados>
           }
         />
-        {/* Panel principal: solo RRHH / DO */}
+
+        {/* Todo lo que lleva menú lateral exige sesión; cada pantalla además exige su permiso */}
         <Route
-          path="/"
           element={
-            <RutaProtegida permiso="ver_panel">
-              <Inicio />
+            <RutaProtegida>
+              <Layout />
             </RutaProtegida>
           }
-        />
-        {/* Consolidado por período de corte: RRHH / DO y Contabilidad */}
-        <Route
-          path="/consolidado"
-          element={
-            <RutaProtegida permiso="ver_consolidado">
-              <Consolidado />
-            </RutaProtegida>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        >
+          {/* Panel principal: solo RRHH / DO */}
+          <Route
+            path="/"
+            element={
+              <RutaProtegida permiso="ver_panel">
+                <Inicio />
+              </RutaProtegida>
+            }
+          />
+          {/* Reporte por período de corte: RRHH / DO y Contabilidad */}
+          <Route
+            path="/consolidado"
+            element={
+              <RutaProtegida permiso="ver_consolidado">
+                <Consolidado />
+              </RutaProtegida>
+            }
+          />
+          {/* Pantallas del menú que aún no se construyen */}
+          {RUTAS_PENDIENTES.map((pantalla) => (
+            <Route
+              key={pantalla.ruta}
+              path={pantalla.ruta}
+              element={
+                <RutaProtegida permiso={pantalla.permiso}>
+                  <EnConstruccion titulo={pantalla.titulo} />
+                </RutaProtegida>
+              }
+            />
+          ))}
+          <Route path="*" element={<IrAlInicio />} />
+        </Route>
       </Routes>
     </AuthProvider>
   )

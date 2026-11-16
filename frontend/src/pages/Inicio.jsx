@@ -1,28 +1,15 @@
-import { useAuth } from '../auth/AuthContext'
+import Encabezado from '../components/Encabezado'
 
-// Pantalla temporal: confirma que el login funciona. Aquí irá el panel principal.
+// Panel principal (Figma: "Panel principal"). Por ahora solo el armazón: aquí irán los indicadores.
 export default function Inicio() {
-  const { usuario, logout } = useAuth()
-
   return (
-    <main className="min-vh-100 d-flex align-items-center justify-content-center p-4">
-      <section className="card border-0 w-100 shadow" style={{ maxWidth: 440, borderRadius: 20 }}>
-        <div className="card-body p-5">
-          <h1 className="fw-bold fs-2 mb-3" style={{ color: 'var(--color-azul)' }}>
-            Sesión iniciada
-          </h1>
-          <p className="mb-1">
-            Hola, <strong>{usuario.nombre}</strong>.
-          </p>
-          <p className="mb-1">
-            Rol: {usuario.rolNombre} ({usuario.rol})
-          </p>
-          <p className="small text-secondary mt-3 mb-4">Este es el dasboard principal</p>
-          <button type="button" className="btn btn-primary w-100" onClick={logout}>
-            Cerrar sesión
-          </button>
+    <>
+      <Encabezado titulo="Panel principal" subtitulo="Resumen del período de corte" />
+      <section className="app__contenido">
+        <div className="card panel-tarjeta">
+          <div className="card-body p-4 text-secondary">Aquí irán los indicadores del período de corte.</div>
         </div>
       </section>
-    </main>
+    </>
   )
 }

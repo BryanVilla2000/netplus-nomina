@@ -1,5 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom'
+import AccesoDenegado from '../pages/AccesoDenegado'
 import { useAuth } from './AuthContext'
+import { rutaInicial } from './rutaInicial'
 
 function Cargando() {
   return (
@@ -10,14 +12,6 @@ function Cargando() {
       Cargando…
     </div>
   )
-}
-
-// Primera pantalla de cada rol: RRHH / DO entra al panel; Contabilidad, al consolidado.
-// Devuelve null si el usuario no tiene ninguna vista asignada.
-function rutaInicial(puede) {
-  if (puede('ver_panel')) return '/'
-  if (puede('ver_consolidado')) return '/consolidado'
-  return null
 }
 
 function SinAcceso() {
@@ -40,18 +34,15 @@ function SinAcceso() {
 }
 
 // Solo entra quien tiene sesión; si no, va al login y luego regresa a donde quería ir.
-// Con `permiso`, además debe tener ese permiso: si no, se le lleva a la pantalla de su rol.
+// Con `permiso`, además debe tener ese permiso: si no, ve la pantalla "Acceso restringido".
 export function RutaProtegida({ permiso, children }) {
   const { usuario, verificando, puede } = useAuth()
   const ubicacion = useLocation()
 
   if (verificando) return <Cargando />
   if (!usuario) return <Navigate to="/login" replace state={{ desde: ubicacion }} />
-
-  if (permiso && !puede(permiso)) {
-    const destino = rutaInicial(puede)
-    return destino ? <Navigate to={destino} replace /> : <SinAcceso />
-  }
+  if (rutaInicial(puede) === null) return <SinAcceso />
+  if (permiso && !puede(permiso)) return <AccesoDenegado />
   return children
 }
 
@@ -62,4 +53,10 @@ export function SoloInvitados({ children }) {
   if (verificando) return <Cargando />
   if (usuario) return <Navigate to={rutaInicial(puede) ?? '/'} replace />
   return children
+}
+
+// Rutas que no existen: cada rol vuelve a su pantalla de inicio
+export function IrAlInicio() {
+  const { usuario, puede } = useAuth()
+  return <Navigate to={(usuario && rutaInicial(puede)) || '/'} replace />
 }
