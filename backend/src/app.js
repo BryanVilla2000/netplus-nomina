@@ -3,6 +3,7 @@ const cors = require('cors');
 const config = require('./config/config');
 const db = require('./config/db');
 const authRutas = require('./routes/auth'); // NUEVO
+const marcacionesRutas = require('./routes/marcaciones');
 const { noEncontrado, manejadorErrores } = require('./middleware/errores');
 
 const app = express();
@@ -18,6 +19,8 @@ app.get('/api/salud', async (req, res) => {
 });
 
 app.use('/api/auth', authRutas); // NUEVO
+app.use('/api/marcaciones', marcacionesRutas);
+
 
 app.use(noEncontrado);
 app.use(manejadorErrores);
