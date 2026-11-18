@@ -11,12 +11,9 @@ const esquemaLogin = z.object({
   clave: z.string().min(1).max(128),
 });
 
-// 5 fallos por usuario y 20 por IP cada 15 minutos
 const limitePorUsuario = crearLimitador({ maximo: 5, ventanaMs: 15 * 60 * 1000 });
 const limitePorIp = crearLimitador({ maximo: 20, ventanaMs: 15 * 60 * 1000 });
 
-// Se compara contra este hash cuando el usuario no existe, para que la respuesta
-// tarde lo mismo y no se pueda averiguar qué usuarios existen.
 const HASH_RELLENO = bcrypt.hashSync('relleno-para-usuarios-inexistentes', 12);
 
 router.post('/login', async (req, res) => {
@@ -60,7 +57,6 @@ router.post('/login', async (req, res) => {
   res.json({ token, usuario: datosPublicos(fila) });
 });
 
-// Devuelve el usuario de la sesión actual (el frontend lo usa al abrir la aplicación)
 router.get('/me', requiereSesion, (req, res) => {
   res.json({ usuario: req.usuario });
 });

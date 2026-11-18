@@ -1,4 +1,3 @@
-/* ===== Estructura con sesión: menú lateral (Figma: "Menú lateral", 264 px) + pantalla ===== */
 .app__principal {
   min-width: 0;
 }
@@ -6,7 +5,6 @@
   padding: 32px;
 }
 
-/* ---------- Menú lateral ---------- */
 .menu {
   flex: 0 0 264px;
   width: 264px;
@@ -120,7 +118,6 @@
   color: var(--color-suave);
 }
 
-/* ---------- Encabezado de cada pantalla ---------- */
 .encabezado {
   padding: 20px 32px;
   background: var(--color-blanco);
@@ -151,7 +148,6 @@
   color: var(--color-blanco);
 }
 
-/* ---------- Tarjeta base de contenido ---------- */
 .panel-tarjeta {
   --bs-card-bg: var(--color-blanco);
   --bs-card-border-color: var(--color-borde);
@@ -159,7 +155,6 @@
   box-shadow: 0 4px 16px rgba(35, 58, 132, 0.08);
 }
 
-/* ---------- Pantallas menores a 992 px: el menú se abre sobre el contenido ---------- */
 .app__barra {
   padding: 8px 16px;
   background: var(--color-blanco);
@@ -212,7 +207,6 @@
   }
 }
 
-/* ---------- Pantalla "Acceso restringido" ---------- */
 .acceso__icono {
   display: flex;
   align-items: center;

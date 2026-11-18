@@ -1,15 +1,10 @@
-/* ===== Pantalla de inicio de sesión (Figma: "Inicio de sesión – Escritorio", 1440 × 900) =====
-   Bootstrap pone el layout, la tarjeta, los campos, el botón y las alertas (ver Login.jsx).
-   Aquí solo queda lo propio de la marca. */
 
-/* ---------- Panel de marca (izquierda) ---------- */
 .login__marca {
   padding: 64px;
   background-color: var(--color-azul);
   background-image: var(--degradado-marca);
 }
 
-/* Los círculos se anclan arriba/derecha/abajo para conservar la composición en cualquier alto de pantalla */
 .login__circulo {
   position: absolute;
   display: block;
@@ -41,7 +36,6 @@
   background: var(--color-amarillo);
 }
 
-/* Contenido por encima de los círculos */
 .logo,
 .mensaje,
 .login__derechos {
@@ -224,7 +218,6 @@
   gap: 18px;
 }
 
-/* El botón "Mostrar" queda dentro del campo de contraseña */
 .form-control.campo__clave,
 .form-control.campo__clave.is-invalid {
   padding-right: 88px;
@@ -264,3 +257,9 @@
   }
 }
 
+@media (max-width: 991.98px) {
+  .login__principal {
+    background-color: var(--color-azul);
+    background-image: var(--degradado-marca);
+  }
+}

@@ -5,8 +5,10 @@ import Layout from './components/Layout'
 import { RUTAS_PENDIENTES } from './components/menu'
 import Consolidado from './pages/Consolidado'
 import EnConstruccion from './pages/EnConstruccion'
+import ReporteDiario from './pages/ReporteDiario'
 import Inicio from './pages/Inicio'
 import Login from './pages/Login'
+import ImportarMarcaciones from './pages/ImportarMarcaciones'
 
 export default function App() {
   return (
@@ -47,18 +49,24 @@ export default function App() {
               </RutaProtegida>
             }
           />
-          {/* Pantallas del menú que aún no se construyen */}
-          {RUTAS_PENDIENTES.map((pantalla) => (
-            <Route
-              key={pantalla.ruta}
-              path={pantalla.ruta}
-              element={
-                <RutaProtegida permiso={pantalla.permiso}>
-                  <EnConstruccion titulo={pantalla.titulo} />
-                </RutaProtegida>
-              }
-            />
-          ))}
+          {/* Importar marcaciones: solo RRHH / DO */}
+          <Route
+            path="/importar/marcaciones"
+            element={
+              <RutaProtegida permiso="importar">
+                <ImportarMarcaciones />
+              </RutaProtegida>
+            }
+          />
+          {/* Reporte diario: solo RRHH / DO */}
+          <Route
+            path="/reportes/diario"
+            element={
+              <RutaProtegida permiso="ver_panel">
+                <ReporteDiario />
+              </RutaProtegida>
+            }
+          />
           <Route path="*" element={<IrAlInicio />} />
         </Route>
       </Routes>

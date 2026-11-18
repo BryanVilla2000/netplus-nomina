@@ -1,0 +1,12 @@
+/* campos y botones del filtro con la misma altura */
+.rd-filtros .form-control,
+.rd-filtros .form-select,
+.rd-filtros .btn {
+  height: 44px;
+}
+
+.rd-filtros .btn {
+  --bs-btn-padding-y: 0;
+  display: inline-flex;
+  align-items: center;
+}

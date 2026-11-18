@@ -1,13 +1,11 @@
 import { useAuth } from '../auth/AuthContext'
 
-// "Recursos Humanos" -> "RH"; "Contabilidad" -> "CO"
 function iniciales(nombre) {
   const palabras = nombre.trim().split(/\s+/)
   const letras = palabras.length > 1 ? palabras[0][0] + palabras[1][0] : nombre.trim().slice(0, 2)
   return letras.toUpperCase()
 }
 
-// Franja superior de cada pantalla: título, subtítulo, acciones propias de la pantalla y avatar
 export default function Encabezado({ titulo, subtitulo, children }) {
   const { usuario } = useAuth()
 

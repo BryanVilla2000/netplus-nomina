@@ -1,6 +1,3 @@
-// Opciones del menú lateral (Figma: "Menú lateral").
-// `permiso` es lo que debe tener el usuario para ver la opción (ver backend/src/config/permisos.js):
-// RRHH / DO ve todo; Contabilidad solo "Reportes > Por período".
 export const MENU = [
   { etiqueta: 'Panel principal', titulo: 'Panel principal', ruta: '/', permiso: 'ver_panel' },
   {
@@ -19,21 +16,18 @@ export const MENU = [
   { etiqueta: 'Feriados', titulo: 'Feriados', ruta: '/feriados', permiso: 'configurar' },
 ]
 
-// Texto de la tarjeta del usuario, debajo de su nombre
 export const SUBTITULO_ROL = {
   rrhh: 'Desarrollo Organizacional',
   contabilidad: 'Solo consolidado por período',
 }
 
-// Deja solo las opciones que el usuario puede ver
 export function filtrarMenu(menu, puede) {
   return menu
     .map((item) => (item.hijos ? { ...item, hijos: item.hijos.filter((h) => puede(h.permiso)) } : item))
     .filter((item) => (item.hijos ? item.hijos.length > 0 : puede(item.permiso)))
 }
 
-// Pantallas del menú que todavía no están hechas (llevan una página provisional)
-const IMPLEMENTADAS = ['/', '/consolidado']
+const IMPLEMENTADAS = ['/', '/consolidado', '/importar/marcaciones', '/reportes/diario']
 export const RUTAS_PENDIENTES = MENU.flatMap((item) => item.hijos ?? [item]).filter(
   (item) => !IMPLEMENTADAS.includes(item.ruta),
 )

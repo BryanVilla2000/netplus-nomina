@@ -1,5 +1,3 @@
-// Limitador de intentos en memoria, sin librerías extra.
-// Sirve para frenar la adivinanza de contraseñas en el login.
 
 function crearLimitador({ maximo, ventanaMs }) {
   const intentos = new Map(); // clave -> { cuenta, desde }
@@ -11,7 +9,6 @@ function crearLimitador({ maximo, ventanaMs }) {
   limpieza.unref(); // no impide que el proceso termine
 
   return {
-    // Devuelve los milisegundos que faltan para poder intentar de nuevo (0 = permitido)
     espera(clave) {
       const v = intentos.get(clave);
       if (!v) return 0;

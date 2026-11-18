@@ -1,8 +1,4 @@
-/* =========================================================================
-   Tema NETTplus sobre Bootstrap 5.3
-   Colores del Manual de Marca 2026 y de interfaz del prototipo de Figma.
-   Se personaliza con las variables CSS de Bootstrap (sin necesidad de Sass).
-   ========================================================================= */
+
 :root {
   /* Colores de la marca */
   --color-azul: #233a84;
@@ -17,8 +13,7 @@
   --color-error: #c62828;
   --color-error-fondo: #fdecec;
 
-  --fuente: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-
+  --fuente: 'Proxima Nova', 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   /* Variables de Bootstrap apuntando a la marca */
   --bs-primary: #233a84;
   --bs-primary-rgb: 35, 58, 132;

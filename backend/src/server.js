@@ -15,7 +15,6 @@ async function iniciar() {
     console.log(`API lista en http://localhost:${config.PORT}`);
   });
 
-  // Cierre ordenado con Ctrl+C
   const cerrar = () => {
     servidor.close(async () => {
       await db.destroy();

@@ -3,8 +3,6 @@ import { Outlet } from 'react-router-dom'
 import MenuLateral from './MenuLateral'
 import './Layout.css'
 
-// Estructura de todas las pantallas con sesión: menú lateral a la izquierda y la pantalla a la derecha.
-// En pantallas menores a 992 px el menú se oculta y se abre con el botón de la barra superior.
 export default function Layout() {
   const [menuAbierto, setMenuAbierto] = useState(false)
 

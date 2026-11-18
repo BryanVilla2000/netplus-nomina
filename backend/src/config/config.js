@@ -12,7 +12,8 @@ const esquema = z.object({
   DB_NAME: z.string().min(1),
   JWT_SECRET: z.string().min(32, 'debe tener al menos 32 caracteres'),
   JWT_EXPIRA: z.string().default('8h'),
-  SEED_PASSWORD: z.string().min(8, 'debe tener al menos 8 caracteres').optional(),
+  SEED_PASSWORD_RRHH: z.string().min(8, 'debe tener al menos 8 caracteres').optional(),
+  SEED_PASSWORD_CONTABILIDAD: z.string().min(8, 'debe tener al menos 8 caracteres').optional(),
 });
 
 const resultado = esquema.safeParse(process.env);
