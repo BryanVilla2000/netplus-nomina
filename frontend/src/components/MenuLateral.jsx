@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
 import { rutaInicial } from '../auth/rutaInicial'
 import { MENU, SUBTITULO_ROL, filtrarMenu } from './menu'
-// Logo oficial a color sobre tarjeta blanca (el Manual 2026 permite la versión positiva sobre blanco)
 import imgLogoNettplus from '../assets/img/Logo-Nettplus.png'
 
 const claseEnlace = ({ isActive }) =>
@@ -15,7 +14,6 @@ function GrupoMenu({ grupo, alNavegar, abiertoInicial }) {
   const [abierto, setAbierto] = useState(dentro || abiertoInicial)
   const [rutaVista, setRutaVista] = useState(pathname)
 
-  // Si se llega a una pantalla del grupo (por ejemplo desde un enlace del panel), el grupo se abre solo
   if (pathname !== rutaVista) {
     setRutaVista(pathname)
     if (dentro) setAbierto(true)
@@ -69,7 +67,6 @@ export default function MenuLateral({ abierto, alCerrar }) {
 
         {opciones.map((item) =>
           item.hijos ? (
-            // Si el grupo es lo único del menú (Contabilidad), se muestra siempre abierto
             <GrupoMenu key={item.clave} grupo={item} alNavegar={alCerrar} abiertoInicial={opciones.length === 1} />
           ) : (
             <NavLink key={item.ruta} to={item.ruta} end className={claseEnlace} onClick={alCerrar}>

@@ -1,6 +1,5 @@
 import Encabezado from '../components/Encabezado'
 
-// Reporte por período de corte (RF-010): la única pantalla que ve Contabilidad.
 export default function Consolidado() {
   return (
     <>

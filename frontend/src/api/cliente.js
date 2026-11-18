@@ -7,7 +7,6 @@ export const api = axios.create({
   timeout: 15000,
 })
 
-// --- Token de sesión -------------------------------------------------------
 export function leerToken() {
   try {
     return localStorage.getItem(CLAVE_TOKEN)
@@ -20,7 +19,6 @@ export function guardarToken(token) {
   try {
     localStorage.setItem(CLAVE_TOKEN, token)
   } catch {
-    // Si el navegador bloquea el almacenamiento, la sesión dura solo mientras la pestaña esté abierta
   }
 }
 
@@ -28,12 +26,10 @@ export function borrarToken() {
   try {
     localStorage.removeItem(CLAVE_TOKEN)
   } catch {
-    // nada que borrar
   }
 }
 
-// --- Cierre de sesión automático ------------------------------------------
-// AuthContext registra aquí qué hacer cuando el backend dice que la sesión ya no sirve.
+
 let alPerderSesion = null
 export function registrarAlPerderSesion(funcion) {
   alPerderSesion = funcion
@@ -60,7 +56,6 @@ api.interceptors.response.use(
   },
 )
 
-// --- Mensajes de error para mostrar en pantalla ---------------------------
 export function describirError(error) {
   const datos = error.response?.data
   if (datos?.codigo && datos?.mensaje) {

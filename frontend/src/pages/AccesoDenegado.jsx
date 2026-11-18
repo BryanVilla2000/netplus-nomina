@@ -3,7 +3,6 @@ import { useAuth } from '../auth/AuthContext'
 import { rutaInicial } from '../auth/rutaInicial'
 import Encabezado from '../components/Encabezado'
 
-// Figma: "Acceso denegado – Contabilidad". Se muestra cuando el rol no tiene permiso para la ruta (CU-005).
 export default function AccesoDenegado() {
   const { puede } = useAuth()
   const destino = rutaInicial(puede) ?? '/'

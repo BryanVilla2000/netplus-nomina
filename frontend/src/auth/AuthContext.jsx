@@ -5,9 +5,7 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null)
-  // Si hay un token guardado, hay que confirmar con el backend que sigue siendo válido
   const [verificando, setVerificando] = useState(() => Boolean(leerToken()))
-  // 'expirada' cuando el backend cerró la sesión; se muestra como aviso en el login
   const [aviso, setAviso] = useState(null)
 
   const cerrarLocal = useCallback((nuevoAviso = null) => {
@@ -23,7 +21,6 @@ export function AuthProvider({ children }) {
     return () => registrarAlPerderSesion(null)
   }, [cerrarLocal])
 
-  // Al abrir la aplicación: ¿la sesión guardada sigue siendo válida?
   useEffect(() => {
     if (!leerToken()) return undefined
     let cancelado = false
@@ -33,7 +30,6 @@ export function AuthProvider({ children }) {
         if (!cancelado) setUsuario(data.usuario)
       })
       .catch(() => {
-        // Si fue 401, el interceptor ya limpió la sesión. Si fue un fallo de red, se queda en el login.
       })
       .finally(() => {
         if (!cancelado) setVerificando(false)
@@ -54,7 +50,6 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => cerrarLocal(null), [cerrarLocal])
   const limpiarAviso = useCallback(() => setAviso(null), [])
 
-  // ¿El usuario de la sesión tiene este permiso? (la lista viene del backend)
   const puede = useCallback((permiso) => Boolean(usuario?.permisos?.includes(permiso)), [usuario])
 
   const valor = useMemo(
@@ -65,7 +60,6 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const contexto = useContext(AuthContext)
   if (!contexto) throw new Error('useAuth debe usarse dentro de <AuthProvider>')

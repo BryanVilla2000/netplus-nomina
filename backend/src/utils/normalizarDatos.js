@@ -47,7 +47,6 @@ function normalizarFecha(valor) {
 
     const texto = String(obtenerValor(valor));
 
-    // Formato DD-MM-YYYY o DD/MM/YYYY
     const coincidencia = texto.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
 
     if (coincidencia) {
@@ -68,7 +67,6 @@ function normalizarFecha(valor) {
         return `${anio}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
     }
 
-    // Formato ISO YYYY-MM-DD
     const iso = texto.match(/^(\d{4})-(\d{2})-(\d{2})$/);
 
     if (iso) {

@@ -33,8 +33,6 @@ function SinAcceso() {
   )
 }
 
-// Solo entra quien tiene sesión; si no, va al login y luego regresa a donde quería ir.
-// Con `permiso`, además debe tener ese permiso: si no, ve la pantalla "Acceso restringido".
 export function RutaProtegida({ permiso, children }) {
   const { usuario, verificando, puede } = useAuth()
   const ubicacion = useLocation()
@@ -46,7 +44,6 @@ export function RutaProtegida({ permiso, children }) {
   return children
 }
 
-// El login solo es para quien aún no inició sesión
 export function SoloInvitados({ children }) {
   const { usuario, verificando, puede } = useAuth()
 
@@ -55,7 +52,6 @@ export function SoloInvitados({ children }) {
   return children
 }
 
-// Rutas que no existen: cada rol vuelve a su pantalla de inicio
 export function IrAlInicio() {
   const { usuario, puede } = useAuth()
   return <Navigate to={(usuario && rutaInicial(puede)) || '/'} replace />

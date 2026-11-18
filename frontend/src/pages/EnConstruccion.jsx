@@ -1,6 +1,5 @@
 import Encabezado from '../components/Encabezado'
 
-// Página provisional de las pantallas del menú que todavía no se construyen
 export default function EnConstruccion({ titulo }) {
   return (
     <>

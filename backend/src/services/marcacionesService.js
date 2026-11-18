@@ -2,10 +2,8 @@
 const { sincronizarEmpleado } = require('./empleadosService');
 
 async function registrarMarcacion(trx, importacionId, datos) {
-    // Primero verificamos o sincronizamos al empleado.
     const empleadoId = await sincronizarEmpleado(trx, datos);
 
-    // Comprobamos si esta marcación ya existe.
 
     const existente = await trx('marcaciones')
         .where({
@@ -24,7 +22,6 @@ async function registrarMarcacion(trx, importacionId, datos) {
         };
     }
 
-    // Registramos la marcación.
     const [nueva] = await trx('marcaciones')
         .insert({
             empleado_id: empleadoId,

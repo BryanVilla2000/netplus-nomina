@@ -3,8 +3,6 @@ const config = require('../config/config');
 const db = require('../config/db');
 const { permisosDe } = require('../config/permisos');
 
-// Busca el usuario con su rol actual. Se usa tanto en el login como en cada petición,
-// así un cambio de rol o una baja se aplica de inmediato.
 function buscarUsuario(condicion) {
   return db('usuarios as u')
     .join('roles as r', 'r.id', 'u.rol_id')
@@ -51,7 +49,6 @@ async function requiereSesion(req, res, next) {
   next();
 }
 
-// Uso: router.get('/ruta', requiereSesion, requiereRol('rrhh'), controlador)
 const requiereRol = (...roles) => (req, res, next) => {
   if (!req.usuario || !roles.includes(req.usuario.rol)) {
     return res.status(403).json({ mensaje: 'No tienes acceso a esta sección', codigo: 'SIN_PERMISO' });
@@ -59,8 +56,6 @@ const requiereRol = (...roles) => (req, res, next) => {
   next();
 };
 
-// Uso: router.post('/importar', requiereSesion, requierePermiso('importar'), controlador)
-// Es la protección real: ocultar botones en el frontend no basta, aquí se rechaza la petición.
 const requierePermiso = (permiso) => (req, res, next) => {
   if (!req.usuario || !req.usuario.permisos.includes(permiso)) {
     return res.status(403).json({ mensaje: 'No tienes acceso a esta sección', codigo: 'SIN_PERMISO' });
