@@ -1,3 +1,4 @@
+const ErrorNegocio = require('../utils/ErrorNegocio');    
 
 function noEncontrado(req, res) {
   res.status(404).json({
@@ -7,7 +8,6 @@ function noEncontrado(req, res) {
   });
 }
 
-// eslint-disable-next-line no-unused-vars
 function manejadorErrores(err, req, res, next) {
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({
@@ -25,7 +25,6 @@ function manejadorErrores(err, req, res, next) {
     });
   }
 
-  // Errores al cargar archivos con Multer
   if (err.name === 'MulterError') {
     const erroresMulter = {
       LIMIT_FILE_SIZE: {
@@ -56,12 +55,11 @@ function manejadorErrores(err, req, res, next) {
     }
   }
 
-  // Error de validación del tipo de archivo
-  if (err.message === 'Solo se permiten archivos Excel con extensión .xlsx') {
-    return res.status(400).json({
+  if (err instanceof ErrorNegocio) {
+    return res.status(err.estado).json({
       ok: false,
       mensaje: err.message,
-      codigo: 'FORMATO_ARCHIVO_INVALIDO',
+      codigo: err.codigo,
     });
   }
 

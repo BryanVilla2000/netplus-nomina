@@ -1,17 +1,33 @@
 
 const ExcelJS = require('exceljs');
 
-const { validarColumnas } = require('../validators/marcacionesValidator');
+const ErrorNegocio = require('./ErrorNegocio');
+const {
+  validarColumnas,
+  nombreCanonico,
+} = require('../validators/marcacionesValidator');
 
 const MAX_FILAS_BUSQUEDA = 10;
 
 async function leerExcel(rutaArchivo) {
   const libro = new ExcelJS.Workbook();
 
-  await libro.xlsx.readFile(rutaArchivo);
+  try {
+    await libro.xlsx.readFile(rutaArchivo);
+  } catch {
+    throw new ErrorNegocio(
+      'El archivo no es un Excel válido',
+      400,
+      'ARCHIVO_INVALIDO'
+    );
+  }
 
   if (libro.worksheets.length === 0) {
-    throw new Error('El archivo no contiene hojas de cálculo');
+    throw new ErrorNegocio(
+      'El archivo no contiene hojas de cálculo',
+      400,
+      'ARCHIVO_VACIO'
+    );
   }
 
   const hoja = libro.worksheets[0];
@@ -50,8 +66,10 @@ async function leerExcel(rutaArchivo) {
   }
 
   if (!filaEncabezados) {
-    throw new Error(
-      `No se encontraron los encabezados en las primeras ${MAX_FILAS_BUSQUEDA} filas. Columnas faltantes: ${columnasFaltantes.join(', ')}`
+    throw new ErrorNegocio(
+      `No se encontraron los encabezados en las primeras ${MAX_FILAS_BUSQUEDA} filas. Columnas faltantes: ${columnasFaltantes.join(', ')}`,
+      400,
+      'COLUMNAS_FALTANTES'
     );
   }
 
@@ -66,7 +84,7 @@ async function leerExcel(rutaArchivo) {
     encabezados.forEach((encabezado, indice) => {
       const valor = fila.getCell(indice + 1).value;
 
-      registro[encabezado] = valor;
+      registro[nombreCanonico(encabezado)] = valor;
 
       if (valor !== null && valor !== undefined && valor !== '') {
         tieneDatos = true;
@@ -82,7 +100,11 @@ async function leerExcel(rutaArchivo) {
   });
 
   if (filas.length === 0) {
-    throw new Error('El archivo no contiene registros de marcaciones');
+    throw new ErrorNegocio(
+      'El archivo no contiene registros de marcaciones',
+      400,
+      'ARCHIVO_VACIO'
+    );
   }
 
   return {

@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const os = require('os');
 const crypto = require('crypto');
+const ErrorNegocio = require('../utils/ErrorNegocio');
 
 const almacenamiento = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -20,7 +21,11 @@ const filtroArchivo = (req, file, callback) => {
 
   if (extension !== '.xlsx') {
     return callback(
-      new Error('Solo se permiten archivos Excel con extensión .xlsx')
+      new ErrorNegocio(
+        'Solo se permiten archivos Excel con extensión .xlsx',
+        400,
+        'FORMATO_ARCHIVO_INVALIDO'
+      )
     );
   }
 

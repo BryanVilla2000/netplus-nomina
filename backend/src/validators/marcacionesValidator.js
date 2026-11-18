@@ -22,16 +22,16 @@ const esquemaMarcacion = z.object({
   cargoId: z.string().regex(/^\d+$/, 'ID de cargo inválido'),
   fecha: z.string().min(1, 'La fecha es obligatoria'),
   hora: z.string().min(1, 'La hora es obligatoria'),
+  fechaHora: z.string().min(1, 'La fecha y hora son obligatorias'),
   tipoMarcacion: z.string().min(1, 'El tipo de marcación es obligatorio'),
   tipo: z.string().optional(),
   fuenteDatos: z.string().optional(),
   datosOriginales: z.record(z.string(), z.unknown()),
 });
 
-function validarColumnas(columnas) {
-  const normalizar = (valor) =>
-    String(valor ?? '').trim().toLowerCase();
+const normalizar = (valor) => String(valor ?? '').trim().toLowerCase();
 
+function validarColumnas(columnas) {
   const disponibles = columnas.map(normalizar);
 
   return COLUMNAS_REQUERIDAS.filter(
@@ -39,8 +39,16 @@ function validarColumnas(columnas) {
   );
 }
 
+function nombreCanonico(encabezado) {
+  return (
+    COLUMNAS_REQUERIDAS.find((c) => normalizar(c) === normalizar(encabezado)) ??
+    encabezado
+  );
+}
+
 module.exports = {
   COLUMNAS_REQUERIDAS,
   esquemaMarcacion,
   validarColumnas,
+  nombreCanonico,
 };

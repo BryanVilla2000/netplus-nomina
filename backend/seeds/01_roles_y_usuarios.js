@@ -38,7 +38,7 @@ exports.seed = async (knex) => {
 
     const existente = await knex('usuarios')
       .whereRaw('lower(usuario) = ?', [u.usuario])
-      .first();
+      .toLowerCase();
 
     const clave_hash = await bcrypt.hash(clave, 12);
 

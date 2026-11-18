@@ -1,9 +1,10 @@
-
 const fs = require('fs/promises');
+const { ZodError } = require('zod');
 const db = require('../config/db');
 
 const leerExcel = require('../utils/leerExcel');
 const calcularHash = require('../utils/calcularHash');
+const ErrorNegocio = require('../utils/ErrorNegocio');
 const { normalizarMarcacion } = require('../utils/normalizarDatos');
 
 const {
@@ -16,6 +17,14 @@ const {
   registrarMarcacion,
 } = require('../services/marcacionesService');
 
+function mensajeDeError(error) {
+  if (error instanceof ZodError) {
+    return error.issues.map((problema) => problema.message).join('; ');
+  }
+
+  return error.message;
+}
+
 async function importarMarcaciones(req, res, next) {
   const rutaArchivo = req.file?.path;
   let importacionId = null;
@@ -26,24 +35,25 @@ async function importarMarcaciones(req, res, next) {
 
   try {
     if (!req.file) {
-      return res.status(400).json({
-        ok: false,
-        mensaje: 'Debes seleccionar un archivo Excel',
-      });
+      throw new ErrorNegocio(
+        'Debes seleccionar un archivo Excel',
+        400,
+        'SIN_ARCHIVO'
+      );
     }
 
     const hashArchivo = await calcularHash(rutaArchivo);
 
     const importacionExistente = await db('importaciones')
-      .where({ hash_archivo: hashArchivo })
-      .whereIn('estado', ['completada', 'completada_con_errores'])
+      .where({ hash_archivo: hashArchivo, estado: 'completada' })
       .first();
 
     if (importacionExistente) {
-      return res.status(409).json({
-        ok: false,
-        mensaje: 'Este archivo ya fue importado anteriormente',
-      });
+      throw new ErrorNegocio(
+        'Este archivo ya fue importado anteriormente',
+        409,
+        'ARCHIVO_REPETIDO'
+      );
     }
 
     const resultadoExcel = await leerExcel(rutaArchivo);
@@ -79,7 +89,7 @@ async function importarMarcaciones(req, res, next) {
           registrarError(trx, {
             importacionId,
             numeroFila: fila.numeroFila,
-            mensaje: error.message,
+            mensaje: mensajeDeError(error),
             datos: fila.datos,
           })
         );

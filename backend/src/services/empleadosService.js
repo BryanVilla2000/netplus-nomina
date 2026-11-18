@@ -16,7 +16,6 @@ async function sincronizarCatalogo(
 
   const nombre = normalizarTexto(nombreRecibido);
 
-  // Si no recibimos un nombre nuevo, conservamos el existente.
   const nombreFinal =
     nombre || existente?.nombre || nombreProvisional;
 
@@ -76,7 +75,7 @@ async function sincronizarEmpleado(trx, datos) {
     'cargos',
     datos.cargoId,
     datos.cargo,
-    `Cargo de prueba ${datos.cargoId}`
+    `Cargo ${datos.cargoId}`
   );
 
   const existente = await trx('empleados')
@@ -84,14 +83,21 @@ async function sincronizarEmpleado(trx, datos) {
     .first();
 
   if (existente) {
-    await trx('empleados')
-      .where({ id: existente.id })
-      .update({
-        nombres,
-        departamento_id: departamentoId,
-        cargo_id: cargoId,
-        actualizado_en: trx.fn.now(),
-      });
+    const cambio =
+      existente.nombres !== nombres ||
+      existente.departamento_id !== departamentoId ||
+      existente.cargo_id !== cargoId;
+
+    if (cambio) {
+      await trx('empleados')
+        .where({ id: existente.id })
+        .update({
+          nombres,
+          departamento_id: departamentoId,
+          cargo_id: cargoId,
+          actualizado_en: trx.fn.now(),
+        });
+    }
 
     return existente.id;
   }
